@@ -1,13 +1,8 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import { FormikValues } from 'formik';
-import { FormValues } from '../components/LoginForm';
 import Container from '../components/Container';
 
 export interface HomePageProps {
-  // onSubmit: (values: FormValues) => void | Promise<any>;
-  // onRegister: (values: FormValues) => void | Promise<any>;
 }
 
 export default function HomePage({ }: HomePageProps) {
@@ -20,11 +15,11 @@ export default function HomePage({ }: HomePageProps) {
               <h1 className='font-medium text-[70px] leading-[100%] tracking-[-0.03em] mb-7'>
                 Make Life Easier for the Family:
               </h1>
-              <p className='font-normal text-[28px] leading-[107%] tracking-[-0.02em] mb-16'>
+              <p className='text-[28px] leading-[107%] tracking-[-0.02em] mb-16'>
                 Find Babysitters Online for All Occasions
               </p>
               <Link
-                className='border w-[230px] h-[60px] font-medium text-xl leading-[120%] tracking-[-0.01em] text-current flex  items-center justify-center rounded-[30px] border-solid border-[rgba(251,251,251,0.4)] '
+                className='group relative border w-[230px] h-[60px] font-medium text-xl leading-[120%] tracking-[-0.01em] text-current flex  items-center justify-center rounded-[30px] border-solid border-[rgba(251,251,251,0.4)] '
                 to='/nannies'
               >
                 <span className='group relative'>
@@ -52,7 +47,7 @@ export default function HomePage({ }: HomePageProps) {
                   <use href='/icons.svg#check'></use>
                 </svg>
               </div>
-              <p className='font-normal text-base text-[rgba(17,16,28,0.5)] flex flex-col gap-[6px]'>
+              <p className='text-base text-[rgba(17,16,28,0.5)] flex flex-col gap-[6px]'>
                 Experienced nannies
                 <span className='font-bold text-2xl text-[#11101c]'>
                   15,000
