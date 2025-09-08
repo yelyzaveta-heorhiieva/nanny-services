@@ -14,6 +14,9 @@ const modalSlice = createSlice({
     register: false,
   },
   reducers: {
+    openModal(state) {
+      state.modalIsOpen = true;
+    },
     openLogInModal(state) {
       state.modalIsOpen = true;
       state.logIn = true;
@@ -30,6 +33,6 @@ const modalSlice = createSlice({
   },
 });
 
-export const { openLogInModal, openRegisterModal, closeModal } =
+export const { openModal, openLogInModal, openRegisterModal, closeModal } =
   modalSlice.actions;
 export default modalSlice.reducer;

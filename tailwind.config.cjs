@@ -6,7 +6,10 @@ module.exports = {
       textDecorationSkipInk: {
         none: 'none',
         auto: 'auto',
-      }
+      },
+      fontFamily: {
+        helvetica: ['"Helvetica Neue"', 'sans-serif'], 
+      },
     }
   },
   plugins: [

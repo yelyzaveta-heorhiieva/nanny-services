@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { closeModal } from '../redux/modalSlice';
 
-export interface ModalFormProps {
+export interface ModalProps {
   children: ReactElement;
 }
 
-export default function ModalForm({ children }: ModalFormProps) {
+export default function Modal({ children }: ModalProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {

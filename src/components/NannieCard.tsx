@@ -1,32 +1,29 @@
 import React, { useState } from 'react';
 import { NannieCardInterface } from '../pages/NanniesPage';
-import { boolean } from 'yup';
 import NannieFeature from './NannieFeature';
 import NanniePoint from './NanniePoint';
 import ReviewItem from './ReviewItem';
+import { getAge } from '../utils/getAge';
+import { ref, update } from 'firebase/database';
+import { db } from '../../firebase';
+import { getAuth } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsLogged } from '../redux/selectors';
+import Modal from './Modal';
+import { AppDispatch } from '../redux/store';
+import { openModal } from '../redux/modalSlice';
+import toast from 'react-hot-toast';
 
 export interface NannieCardProps {
   item: NannieCardInterface;
 }
 
-function getAge(birthDate: string) {
-  const today = new Date();
-  const birth = new Date(birthDate);
-
-  let age = today.getFullYear() - birth.getFullYear();
-  const monthDiff = today.getMonth() - birth.getMonth();
-  const dayDiff = today.getDate() - birth.getDate();
-
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    age--;
-  }
-
-  return age;
-}
-
 export default function NannieCard({ item }: NannieCardProps) {
   const [readMore, setReadMore] = useState<boolean>(false);
+  const [favorites, setFavorites] = useState<boolean>(false);
+  const isLoggedIn = useSelector(selectIsLogged);
   const {
+    id,
     name,
     avatar_url,
     birthday,
@@ -40,6 +37,29 @@ export default function NannieCard({ item }: NannieCardProps) {
     characters,
     rating,
   } = item;
+
+  const addFavoriteProduct = (
+    userId: string | undefined,
+    productId: string,
+  ) => {
+    const updates: any = {};
+    updates[`/users/${userId}/favorites/${productId}`] = true;
+
+    update(ref(db), updates)
+      .then(() => console.log('Товар додано до улюблених'))
+      .catch((err) => console.error('Помилка:', err));
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isLoggedIn) {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      addFavoriteProduct(user?.uid, id);
+      setFavorites(true);
+    } else {
+      toast.error('Please log in or sign up')
+    }
+  };
 
   return (
     <>
@@ -99,11 +119,19 @@ export default function NannieCard({ item }: NannieCardProps) {
           <span className='text-[#38cd3e]'>{price_per_hour}$</span>
         </p>
       </div>
-      <button className='absolute right-6'>
+      <button
+        className='absolute right-6'
+        type='button'
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e)}
+      >
         <svg
           width='26'
           height='26'
-          className='fill-transparent stroke-[2px] stroke-[#11101C]'
+          className={` stroke-[2px]  ${
+            favorites
+              ? 'stroke-[#103931] fill-[#103931]'
+              : 'stroke-[#11101C] fill-transparent'
+          }`}
         >
           <use href='/icons.svg#heart'></use>
         </svg>
