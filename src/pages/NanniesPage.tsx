@@ -1,60 +1,133 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Container from '../components/Container';
+import {
+  ref,
+  get,
+  query,
+  orderByKey,
+  startAfter,
+  limitToFirst,
+} from 'firebase/database';
+import { db } from '../../firebase';
+import NannieCard from '../components/NannieCard';
+import toast from 'react-hot-toast';
+import { FirebaseError } from 'firebase/app';
+import Loader from '../components/Loader';
 
 export interface NanniesPageProps {}
 
+export interface Review {
+  reviewer: string;
+  rating: number;
+  comment: string;
+}
+
+export interface NannieCardInterface {
+  id: string;
+  name: string;
+  avatar_url: string;
+  birthday: string;
+  experience: string;
+  reviews: Review[];
+  education: string;
+  kids_age: string;
+  price_per_hour: number;
+  location: string;
+  about: string;
+  characters: string[];
+  rating: number;
+}
+
 export default function NanniesPage({}: NanniesPageProps) {
+  const [nannies, setNannies] = useState<NannieCardInterface[]>([]);
+  const [lastKey, setLastKey] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const PAGE_SIZE = 2;
+
+  const fetchNextPage = async () => {
+    try {
+      setLoading(true);
+      const nanniesRef = ref(db);
+      const snapshot = await get(
+        lastKey
+          ? query(
+              nanniesRef,
+              orderByKey(),
+              startAfter(lastKey),
+              limitToFirst(PAGE_SIZE + 1),
+            )
+          : query(nanniesRef, orderByKey(), limitToFirst(PAGE_SIZE + 1)),
+      );
+      if (snapshot.exists()) {
+        const data = Object.entries(snapshot.val()).map(([id, value]) => ({
+          ...(value as NannieCardInterface),
+          id,
+        }));
+        if (data.length > PAGE_SIZE) {
+          setHasMore(true);
+          data.pop();
+        } else {
+          setHasMore(false);
+        }
+
+        setNannies((prev) => [...prev, ...data]);
+        setTimeout(() => {
+          if (containerRef.current) {
+            containerRef.current.scrollTo({
+              top:
+                containerRef.current.scrollHeight -
+                containerRef.current.clientHeight,
+              behavior: 'smooth',
+            });
+          }
+        }, 0);
+
+        if (data.length > 0) {
+          setLastKey(data[data.length - 1].id);
+        }
+      } else {
+        setHasMore(false);
+      }
+    } catch (e: unknown) {
+      toast.error((e as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchNextPage();
+  }, []);
+
+  console.log(nannies);
+
   return (
-    <div className='mt-[88px]'>
+    <div className='mt-[88px] overflow-y-auto h-[100vh]' ref={containerRef}>
       <Container>
-        <h1>NanniesPage</h1>
-        <p className='text-4xl'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-          blanditiis, in at ex qui neque deleniti vel quam similique, ratione ut
-          nostrum dolore ipsam pariatur quaerat omnis error veniam nesciunt
-          natus porro sint? Voluptate praesentium, in, qui assumenda fugit natus
-          eius ex, recusandae error consequatur consectetur. Fuga adipisci
-          expedita reprehenderit corporis ut maiores est. Repellat tempora
-          soluta culpa, neque debitis inventore temporibus quae id consequatur!
-          Molestiae fugit vitae eius veritatis, delectus, odio sit eaque autem
-          aspernatur eveniet repellendus amet rerum tenetur corrupti consequatur
-          ea quaerat accusamus tempore est quidem labore rem at in vero. Sequi
-          delectus fugit sunt asperiores ratione aperiam placeat veniam
-          repellendus? Eaque perferendis ratione obcaecati quas accusamus
-          quibusdam perspiciatis dignissimos sit nobis praesentium, sed, soluta
-          quod. Amet quia mollitia iusto obcaecati, quisquam cupiditate,
-          delectus nostrum et deserunt animi voluptatum dolor. Necessitatibus,
-          dicta sit id distinctio, fugiat cupiditate veniam natus inventore at
-          numquam quos fuga atque nesciunt optio maxime voluptates placeat rem
-          consequuntur ab iure dolorem aliquam, cumque sint enim? Pariatur
-          minima expedita quaerat illo magnam inventore, quas nulla molestiae?
-          Ut temporibus eos voluptate ipsum illum minus possimus recusandae
-          eveniet corrupti, nulla rem nam a adipisci consequatur voluptatum,
-          deserunt, suscipit sint rerum inventore similique. Incidunt commodi
-          soluta molestiae laborum dicta corrupti. Inventore omnis quos id modi
-          assumenda perferendis, adipisci quibusdam ipsum, quisquam officia,
-          aliquid illo maxime. Ex esse iure placeat sit repellendus earum!
-          Reiciendis, aspernatur. Sunt exercitationem magnam, aspernatur commodi
-          corrupti amet ipsum explicabo itaque reprehenderit voluptate nesciunt
-          consectetur beatae blanditiis quam inventore sequi nihil quo veniam
-          earum neque quasi deleniti? Dolorem aspernatur dignissimos ex
-          excepturi veritatis, quas eius nemo consectetur dolor aperiam debitis
-          sed ab placeat quod consequuntur dolore ipsa odit? Atque eum
-          laboriosam dicta modi tempora esse, officia laudantium, sint vero
-          voluptatum quidem error commodi earum accusamus corrupti obcaecati
-          corporis quam. Nobis sint, tempore officia hic impedit magnam veniam
-          illum praesentium ducimus incidunt maxime officiis asperiores quisquam
-          inventore atque ut? Enim sed accusamus assumenda, modi commodi ipsum
-          sequi, aperiam ipsa odit dolore laborum repellendus quibusdam autem
-          sunt! Earum quibusdam modi deserunt vel deleniti quis sed doloremque
-          dolore quo, aliquam quae? At qui aliquam earum, sint ea dolorum libero
-          voluptates sit dolorem tempore! Quis cum blanditiis obcaecati
-          delectus. Doloremque dicta ullam provident eum inventore, explicabo
-          saepe, nulla voluptas beatae, velit eaque dolore quisquam unde
-          obcaecati ducimus! Nisi est incidunt fugiat a, eos earum repellendus
-          nobis corrupti suscipit quis? Aliquid velit ut, vero dolor quisquam
-          facere amet quo.
-        </p>
+        <ul className='flex flex-col gap-8 pb-16 pt-8'>
+          {nannies.map((item: NannieCardInterface) => (
+            <li
+              key={item.id}
+              className='bg-[#fbfbfb] p-6 rounded-3xl flex gap-6 relative'
+            >
+              <NannieCard item={item} />
+            </li>
+          ))}
+        </ul>
+        {!loading && hasMore && (
+          <button
+            onClick={fetchNextPage}
+            disabled={loading}
+            className=' w-[159px] h-12 rounded-[30px] bg-[#103931] font-medium leading-[125%] tracking-[-0.01em] 
+            text-[#fbfbfb] mb-[100px] mx-auto'
+          >
+            Load more
+          </button>
+        )}
+        {loading && <Loader/>}
       </Container>
     </div>
   );

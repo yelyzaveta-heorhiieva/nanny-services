@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import './app.css';
 import PrivateRoute from './components/PrivateRoute';
+import { useSelector } from 'react-redux';
 
 
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -12,7 +13,6 @@ const NanniesPage = lazy(() => import('./pages/NanniesPage'));
 const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
 
 function App() {
-
 
   return (
     <>

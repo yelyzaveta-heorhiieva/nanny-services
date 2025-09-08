@@ -4,14 +4,16 @@ import { AppDispatch } from '../redux/store';
 import { selectIsLogged, selectUser } from '../redux/selectors';
 import { logOut } from '../redux/authOperations';
 import { openLogInModal, openRegisterModal } from '../redux/modalSlice';
+import { useLocation } from 'react-router-dom';
 
 export interface UserActionsProps {}
 
-export default function UserActions({ }: UserActionsProps) {
-      const dispatch = useDispatch<AppDispatch>();
-      const user = useSelector(selectUser);
-    const isLogged = useSelector(selectIsLogged);
-    
+export default function UserActions({}: UserActionsProps) {
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector(selectUser);
+  const isLogged = useSelector(selectIsLogged);
+  const location = useLocation();
+
   return (
     <>
       {isLogged ? (
@@ -27,7 +29,8 @@ export default function UserActions({ }: UserActionsProps) {
           <button
             onClick={() => dispatch(logOut())}
             type='button'
-            className='border w-[134px] h-12 flex justify-center items-center rounded-[30px] border-solid border-[rgba(251,251,251,0.4)]'
+            className='border w-[134px] h-12 flex justify-center items-center rounded-[30px] border-solid
+             border-[rgba(251,251,251,0.4)] hover:bg-[#fbfbfb] hover:text-[#103931] duration-300'
           >
             Log out
           </button>
@@ -38,7 +41,8 @@ export default function UserActions({ }: UserActionsProps) {
             <button
               onClick={() => dispatch(openLogInModal())}
               type='button'
-              className='border w-[124px] h-12 flex justify-center items-center rounded-[30px] border-solid border-[rgba(251,251,251,0.4)]'
+              className='border w-[124px] h-12 flex justify-center items-center rounded-[30px] border-solid border-[rgba(251,251,251,0.4)]
+              hover:bg-[#fbfbfb] hover:text-[#103931] duration-300'
             >
               Log In
             </button>
@@ -47,7 +51,10 @@ export default function UserActions({ }: UserActionsProps) {
             <button
               onClick={() => dispatch(openRegisterModal())}
               type='button'
-              className='w-[168px] h-12 bg-[#103931] px-10 py-3.5 rounded-[30px] hover:bg-[#fbfbfb] hover:text-[#103931] duration-300'
+              className={`w-[168px] h-12 px-10 py-3.5 rounded-[30px] border border-solid border-[rgba(251,251,251,0.4)] ${
+                location.pathname === '/' &&
+                'bg-[#103931] hover:bg-[#fbfbfb] hover:text-[#103931] border-none'
+              } hover:bg-[#fbfbfb] hover:text-[#103931] duration-300`}
             >
               Registration
             </button>
@@ -56,4 +63,4 @@ export default function UserActions({ }: UserActionsProps) {
       )}
     </>
   );
-};
+}
