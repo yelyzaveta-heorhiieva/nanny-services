@@ -14,7 +14,8 @@ export default function PasswordField({name }: PasswordFieldProps) {
         type={show ? 'text' : 'password'}
         placeholder='Password'
         name={name}
-        className='outline-none border w-full h-[52px] pl-[18px] pr-[18px] py-4 rounded-xl border-solid border-[rgba(17,16,28,0.1)] placeholder-[#11101c]'
+        className='outline-none border w-full h-[52px] pl-[18px] pr-[18px] py-4 rounded-xl 
+        border-solid border-[rgba(17,16,28,0.1)] placeholder-[#11101c] bg-transparent'
       />
       <ErrorMessage
         name={name}

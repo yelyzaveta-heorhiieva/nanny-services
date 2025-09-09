@@ -4,14 +4,15 @@ import Navigation from './Navigation';
 import Container from './Container';
 import { useSelector } from 'react-redux';
 import AuthForm from './AuthForm';
-import { selectModalIsOpen } from '../redux/selectors';
+import { selectLoginFormIsOpen, selectModalIsOpen, selectRegisterFormIsOpen } from '../redux/selectors';
 import UserActions from './UserActions';
 
 export interface HeaderProps {}
 
 export default function Header({}: HeaderProps) {
   const location = useLocation();
-  const modalIsOpen = useSelector(selectModalIsOpen);
+  const registerFormIsOpen = useSelector(selectRegisterFormIsOpen);
+  const loginFormIsOpen = useSelector(selectLoginFormIsOpen)
 
   return (
     <div
@@ -31,8 +32,8 @@ export default function Header({}: HeaderProps) {
             <Navigation />
             <UserActions />
           </div>
-          {modalIsOpen && (
-            <Modal>
+          {(registerFormIsOpen || loginFormIsOpen) && (
+            <Modal width='w-[565px]'>
               <AuthForm />
             </Modal>
           )}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import Select, { SingleValue } from 'react-select';
 import { OptionType } from '../pages/NanniesPage';
 
@@ -42,22 +42,22 @@ const classNames = {
   dropdownIndicator: () => 'text-[#fbfbfb]',
 };
 
+
 export default function Filters({ handleChange, selected }: FiltersProps) {
   return (
     <div className='mt-[152px]'>
       <label className='font-medium text-sm leading-[129%] text-[#8a8a89]'>
-              Filters
-              <Select
-        options={options}
-        onChange={handleChange}
-        unstyled
-        value={selected}
-        placeholder='A to Z'
-        isSearchable={false}
-        classNames={classNames}
-      />
+        Filters
+        <Select
+          options={options}
+          onChange={handleChange}
+          unstyled
+          value={selected}
+          placeholder='A to Z'
+          isSearchable={false}
+          classNames={classNames}
+        />
       </label>
-      
     </div>
   );
 }

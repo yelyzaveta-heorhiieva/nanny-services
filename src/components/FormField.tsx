@@ -1,19 +1,24 @@
 import { ErrorMessage, Field } from 'formik';
 
 export interface FormFieldProps {
-    type: string;
-    placeholder: string;
-    name: string;
+  type: string;
+  placeholder: string;
+  name: string;
 }
 
-export default function FormField({type, placeholder, name}: FormFieldProps) {
+export default function FormField({
+  type,
+  placeholder,
+  name,
+}: FormFieldProps) {
   return (
-    <label className='mb-[18px] block'>
+    <label>
       <Field
         type={type}
         placeholder={placeholder}
         name={name}
-        className='outline-none  border w-full h-[52px] pl-[18px] pr-[18px] py-4 rounded-xl border-solid border-[rgba(17,16,28,0.1)] placeholder-[#11101c]'
+        className='outline-none  border w-full h-[52px] px-[18px] py-4 rounded-xl 
+        border-solid border-[rgba(17,16,28,0.1)] placeholder-[#11101c] bg-transparent'
       />
       <ErrorMessage
         name={name}
@@ -22,4 +27,4 @@ export default function FormField({type, placeholder, name}: FormFieldProps) {
       />
     </label>
   );
-};
+}

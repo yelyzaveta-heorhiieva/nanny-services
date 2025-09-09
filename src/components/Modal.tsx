@@ -5,9 +5,10 @@ import { closeModal } from '../redux/modalSlice';
 
 export interface ModalProps {
   children: ReactElement;
+  width: string;
 }
 
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ children, width = "565" }: ModalProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -30,8 +31,8 @@ export default function Modal({ children }: ModalProps) {
       }
     >
       <div
-        className='absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-[#fbfbfb] 
-      rounded-[30px] p-16 w-[565px] z-[1000]'
+        className={`absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-[#fbfbfb] 
+      rounded-[30px] p-16 ${width} z-[1000]`}
       >
         <button
           type='button'

@@ -7,12 +7,10 @@ import { getAge } from '../utils/getAge';
 import { ref, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { getAuth } from 'firebase/auth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectIsLogged } from '../redux/selectors';
-import Modal from './Modal';
-import { AppDispatch } from '../redux/store';
-import { openModal } from '../redux/modalSlice';
 import toast from 'react-hot-toast';
+import NannieCardMore from './NannieCardMore';
 
 export interface NannieCardProps {
   item: NannieCardInterface;
@@ -94,15 +92,7 @@ export default function NannieCard({ item }: NannieCardProps) {
         >
           {!readMore ? 'Read more' : 'Read less'}
         </p>
-        {readMore && (
-          <ul className='mt-[10px] flex gap-[25px] flex-col'>
-            {reviews.map((item, i) => (
-              <li key={item.reviewer + i}>
-                <ReviewItem {...item} />
-              </li>
-            ))}
-          </ul>
-        )}
+        {readMore && <NannieCardMore item={item} />}
       </div>
       <div className='absolute right-[98px] flex gap-8 font-medium text-[#11101c]'>
         <NanniePoint

@@ -68,15 +68,24 @@ export default function AuthForm({}: AuthFormProps) {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form className='flex flex-col gap-[18px]'>
           {registerFormIsOpen && (
-            <FormField type='text' placeholder='Name' name='name' />
+            <FormField
+              type='text'
+              placeholder='Name'
+              name='name'
+            />
           )}
-          <FormField type='email' placeholder='Email' name='email' />
+          <FormField
+            type='email'
+            placeholder='Email'
+            name='email'
+          />
           <PasswordField name='password' />
           <button
             type='submit'
-            className='mt-10 w-full h-[52px] bg-[#103931] flex items-center justify-center rounded-[30px] font-medium text-base leading-[125%] tracking-[-0.01em] text-[#fbfbfb]'
+            className='mt-[22px] w-full h-[52px] bg-[#103931] flex items-center justify-center 
+            rounded-[30px] font-medium text-base leading-[125%] tracking-[-0.01em] text-[#fbfbfb]'
           >
             {loginFormIsOpen ? 'Log In' : 'Sign up'}
           </button>

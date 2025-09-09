@@ -12,10 +12,12 @@ const modalSlice = createSlice({
     modalIsOpen: false,
     logIn: false,
     register: false,
+    popUp: false,
   },
   reducers: {
-    openModal(state) {
+    openPopUp(state) {
       state.modalIsOpen = true;
+      state.popUp = true;
     },
     openLogInModal(state) {
       state.modalIsOpen = true;
@@ -29,10 +31,11 @@ const modalSlice = createSlice({
       state.modalIsOpen = false;
       state.register = false;
       state.logIn = false;
+      state.popUp = false;
     },
   },
 });
 
-export const { openModal, openLogInModal, openRegisterModal, closeModal } =
+export const { openPopUp, openLogInModal, openRegisterModal, closeModal } =
   modalSlice.actions;
 export default modalSlice.reducer;
