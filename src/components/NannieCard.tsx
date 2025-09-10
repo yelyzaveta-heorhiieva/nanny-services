@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { NannieCardInterface } from '../pages/NanniesPage';
 import NannieFeature from './NannieFeature';
 import NanniePoint from './NanniePoint';
-import ReviewItem from './ReviewItem';
 import { getAge } from '../utils/getAge';
 import { ref, update } from 'firebase/database';
 import { db } from '../../firebase';
@@ -26,7 +25,6 @@ export default function NannieCard({ item }: NannieCardProps) {
     avatar_url,
     birthday,
     experience,
-    reviews,
     education,
     kids_age,
     price_per_hour,
