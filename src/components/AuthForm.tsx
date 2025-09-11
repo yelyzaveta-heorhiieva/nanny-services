@@ -2,7 +2,6 @@ import { Form, Formik } from 'formik';
 import { logIn, register } from '../redux/authOperations';
 import { closeModal } from '../redux/modalSlice';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch} from '../redux/store';
 import {

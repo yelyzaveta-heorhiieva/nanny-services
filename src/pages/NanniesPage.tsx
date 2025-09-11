@@ -75,7 +75,7 @@ export default function NanniesPage({}: NanniesPageProps) {
   }, [selectedOption]);
 
   return (
-    <div className='mt-[88px]'>
+    <div className='mt-[88px] min-w-[320px] w-full'>
       <Container>
         <Filters handleChange={handleChange} selected={selectedOption} />
         <ul className='flex flex-col gap-8 pb-16 pt-8'>
@@ -83,7 +83,7 @@ export default function NanniesPage({}: NanniesPageProps) {
             currentNannies.map((item: NannieCardInterface) => (
               <li
                 key={item.id}
-                className='bg-[#fbfbfb] p-6 rounded-3xl flex gap-6 relative'
+                className='bg-[#fbfbfb] sm:p-6 p-4 rounded-3xl flex xls:flex-row flex-col gap-6 relative'
               >
                 <NannieCard item={item} />
               </li>

@@ -9,10 +9,8 @@ export interface ModalProps {
   width: string;
 }
 
-export default function Modal({ children, width = "565" }: ModalProps) {
+export default function Modal({ children, width }: ModalProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const isBigScreen = useMediaQuery({ query: '(min-width: 1280px)' });
-
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -35,7 +33,7 @@ export default function Modal({ children, width = "565" }: ModalProps) {
     >
       <div
         className={`absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-[#fbfbfb] 
-      rounded-[30px] xl:p-16 p-6 ${width} z-[1100]`}
+      rounded-[30px] md:p-16 p-6 ${width} z-[1100]`}
       >
         <button
           type='button'

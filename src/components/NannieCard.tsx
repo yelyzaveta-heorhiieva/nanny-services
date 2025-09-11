@@ -41,7 +41,7 @@ export default function NannieCard({ item }: NannieCardProps) {
 
   return (
     <>
-      <div className='rounded-[30px] border-2 border-solid border-[rgba(240,63,59,0.2)] p-3 min-w-[120px] max-h-[120px] relative'>
+      <div className='rounded-[30px] border-2 border-solid border-[rgba(240,63,59,0.2)] p-3 min-w-[120px] max-w-[120px] max-h-[120px] relative'>
         <img
           src={avatar_url}
           alt={name}
@@ -51,7 +51,7 @@ export default function NannieCard({ item }: NannieCardProps) {
           <use href='/icons.svg#dot'></use>
         </svg>
       </div>
-      <div className='w-full'>
+      <div className='xls:w-full'>
         <p className='font-medium leading-[150%] text-[#8a8a89] mb-2'>Nanny</p>
         <h3 className='font-medium text-2xl leading-[100%] text-[#11101c] mb-6'>
           {name}
@@ -77,7 +77,7 @@ export default function NannieCard({ item }: NannieCardProps) {
         </p>
         {readMore && <NannieCardMore item={item} />}
       </div>
-      <div className='absolute right-[98px] flex gap-8 font-medium text-[#11101c]'>
+      <div className='absolute sm:right-[98px] sm:top-6 top-[60px] max-w-[110px] sm:max-w-full right-0 flex lg:flex-row flex-col sm:gap-4 lg:gap-8 gap-0 font-medium text-[#11101c]'>
         <NanniePoint
           icon='map-pin'
           iconClass='stroke-[1.5] stroke-[#11101C] fill-transparent'
@@ -87,7 +87,7 @@ export default function NannieCard({ item }: NannieCardProps) {
         <NanniePoint icon='star' iconClass=''>
           Rating: {rating}
         </NanniePoint>
-        <p className='items-center leading-[150%] flex gap-2 '>
+        <p className='items-center leading-[150%] flex sm:gap-2 gap-1 sm:text-base text-xs'>
           Price / 1 hour:{' '}
           <span className='text-[#38cd3e]'>{price_per_hour}$</span>
         </p>

@@ -9,7 +9,7 @@ export default function AuthHeader({ }: AuthHeaderProps) {
 
   return (
     <>
-      <h3 className='font-medium xl:text-[40px] text-2xl leading-[120%] tracking-[-0.02em] text-[#11101c] mb-5'>
+      <h3 className='font-medium md:text-[40px] text-2xl leading-[120%] tracking-[-0.02em] text-[#11101c] mb-5'>
         {loginFormIsOpen ? 'Log In' : 'Registration'}
       </h3>
       <p className='font-normal xl:text-base text-sm leading-[125%] text-[rgba(17,16,28,0.5)] mb-10'>

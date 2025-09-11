@@ -8,7 +8,7 @@ export interface NanniePointProps {
 
 export default function NanniePoint({icon, iconClass, children}: NanniePointProps) {
   return (
-    <p className="leading-[150%] items-center flex relative gap-2 after:content-[''] after:block after:w-[1px] after:h-4 after:bg-[rgba(17,16,28,0.2)] after:absolute after:right-0 after:translate-x-4 after:top-1/2 after:-translate-y-1/2">
+    <p className="leading-[150%] sm:text-base text-xs items-center flex relative gap-2 lg:after:content-[''] lg:after:block after:w-[1px] lg:after:h-4 lg:after:bg-[rgba(17,16,28,0.2)] lg:after:absolute lg:after:right-0 lg:after:translate-x-4 lg:after:top-1/2 lg:after:-translate-y-1/2">
       <svg
         width='16'
         height='16'

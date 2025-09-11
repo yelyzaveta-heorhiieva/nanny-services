@@ -22,14 +22,17 @@ export default function Header({}: HeaderProps) {
   const loginFormIsOpen = useSelector(selectLoginFormIsOpen);
   const [menuOpen, setMenuOpen] = useState(false);
   const isBigScreen = useMediaQuery({ query: '(min-width: 1280px)' });
+   const isMediumScreen = useMediaQuery({
+     query: '(min-width: 480px)',
+   });
 
   return (
     <div
-      className={` bg-[#103931] border-b-[rgba(251,251,251,0.4)] min-w-[288px] w-[80vw] xls:min-w-[1376px] 
+      className={` bg-[#103931] border-b-[rgba(251,251,251,0.4)]  
       border-b border-solid ${
         location.pathname === '/'
-          ? 'xls:m-8 m-4 bg-transparent absolute z-[899] top-0'
-          : 'fixed z-[899] top-0'
+          ? 'xls:m-8 m-4 bg-transparent absolute z-[899] top-0 min-w-[288px] w-[80vw]  xls:min-w-[1376px]'
+          : 'fixed z-[899] top-0 left-0 min-w-[320px] w-full xls:min-w-[1440px]'
       }`}
     >
       <Container>
@@ -65,7 +68,7 @@ export default function Header({}: HeaderProps) {
           </div>
 
           {(registerFormIsOpen || loginFormIsOpen) && (
-            <Modal width={isBigScreen ? 'w-[565px]' : 'w-[288px]'}>
+            <Modal width={isMediumScreen ? 'max-w-[565px] min-w-[288px]' : 'w-[288px]'}>
               <AuthForm />
             </Modal>
           )}

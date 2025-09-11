@@ -6,6 +6,7 @@ import { openPopUp } from '../redux/modalSlice';
 import { selectPopUpIsOpen } from '../redux/selectors';
 import Modal from './Modal';
 import PopUp from './PopUp';
+import { useMediaQuery } from 'react-responsive';
 
 export interface NannieCardMoreProps {
   item: NannieCardInterface;
@@ -14,6 +15,8 @@ export interface NannieCardMoreProps {
 export default function NannieCardMore({ item }: NannieCardMoreProps) {
   const dispatch = useDispatch<AppDispatch>();
   const popUpIsOpen = useSelector(selectPopUpIsOpen);
+  const isMediumScreen = useMediaQuery({ query: '(min-width: 480px)' });
+
 
   const { reviews } = item;
 
@@ -39,7 +42,11 @@ export default function NannieCardMore({ item }: NannieCardMoreProps) {
         Make an appointment
       </button>
       {popUpIsOpen && (
-        <Modal width='max-w-[599px]'>
+        <Modal
+          width={
+            isMediumScreen ? 'max-w-[599px] min-w-[288px]' : 'w-[288px]'
+          }
+        >
           <PopUp item={item} />
         </Modal>
       )}

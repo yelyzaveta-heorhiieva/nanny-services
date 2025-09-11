@@ -7,7 +7,6 @@ export interface HomePageProps {
 
 export default function HomePage({ }: HomePageProps) {
   return (
-    <>
       <div className='xls:m-8 m-4 min-w-[288px] w-[80vw] xls:w-[1376px] bg-[#103931] bg-[url(./assets/hero.png)] bg-no-repeat lg:bg-right bg-top xl:bg-contain bg-cover rounded-[30px] '>
         <Container>
           <div className='lg:h-[736px] h-[90vh] flex flex-col gap-2 xls:justify-center justify-end relative xls:pt-[88px]'>
@@ -57,6 +56,5 @@ export default function HomePage({ }: HomePageProps) {
           </div>
         </Container>
       </div>
-    </>
   );
 }
