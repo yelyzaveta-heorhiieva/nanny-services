@@ -41,19 +41,30 @@ export default function FavoritesPage({}: FavoritesPageProps) {
   return (
     <div className='mt-[88px]'>
       <Container>
-        <Filters handleChange={handleChange} selected={selectedOption} />
-        <ul className='flex flex-col gap-8 pb-16 pt-8'>
-          {currentFavorites?.map((item: NannieCardInterface) => (
-            <li
-              key={item.id}
-              className='bg-[#fbfbfb] p-6 rounded-3xl flex gap-6 relative'
-            >
-              <NannieCard item={item} />
-            </li>
-          ))}
-        </ul>
-        {!loading && currentFavorites.length < favorites.length && (
-          <LoadMoreBtn onClick={() => dispatch(loadMoreFavorites(favorites))} />
+        {currentFavorites.length > 0 ? (
+          <>
+            <Filters handleChange={handleChange} selected={selectedOption} />
+            <ul className='flex flex-col gap-8 pb-16 pt-8'>
+              {currentFavorites?.map((item: NannieCardInterface) => (
+                <li
+                  key={item.id}
+                  className='bg-[#fbfbfb] p-6 rounded-3xl flex gap-6 relative'
+                >
+                  <NannieCard item={item} />
+                </li>
+              ))}
+            </ul>
+            {!loading && currentFavorites.length < favorites.length && (
+              <LoadMoreBtn
+                onClick={() => dispatch(loadMoreFavorites(favorites))}
+              />
+            )}
+          </>
+        ) : (
+          <p className='text-[26px] leading-[125%] font-bold text-center top-1/2 left-1/2 absolute translate-x-[-50%]  translate-y-[-50%]'>
+            You have not favorites nannies yet. You can add some from nannies
+            list.
+          </p>
         )}
       </Container>
     </div>

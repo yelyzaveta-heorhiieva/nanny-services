@@ -22,7 +22,7 @@ export default function FormField({
         name={name}
         className={`outline-none  border w-full h-[52px] px-[18px] py-4 rounded-xl 
         border-solid border-[rgba(17,16,28,0.1)] placeholder-[#11101c] bg-transparent
-        ${as === 'textarea' && 'resize-none overflow-hidden h-[116px]'}`}
+        ${as === 'textarea' && 'resize-none overflow-hidden min-h-[116px]'}`}
       />
       <ErrorMessage
         name={name}

@@ -24,7 +24,6 @@ export interface FormValues {
 export default function AuthForm({}: AuthFormProps) {
   const loginFormIsOpen = useSelector(selectLoginFormIsOpen);
   const registerFormIsOpen = useSelector(selectRegisterFormIsOpen);
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const initialValues: FormValues = {
     name: '',
@@ -53,7 +52,6 @@ export default function AuthForm({}: AuthFormProps) {
         await dispatch(register(values)).unwrap();
       }
       dispatch(closeModal());
-      navigate('/nannies');
     } catch (error: any) {
       console.error('Auth error:', error);
     }

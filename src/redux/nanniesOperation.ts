@@ -46,7 +46,7 @@ export const getFavorites = createAsyncThunk('nannies/getFavorite', async (_, th
       const data: string[] = Object.keys(raw);
       return data;
     } 
-    if (!snapshot.exists()) thunkAPI.rejectWithValue('Data is not found');
+    if (!snapshot.exists()) return thunkAPI.rejectWithValue('Data is not found');
   } catch (e) {
     const err = e as FirebaseError;
     return thunkAPI.rejectWithValue(err.message);
@@ -54,11 +54,7 @@ export const getFavorites = createAsyncThunk('nannies/getFavorite', async (_, th
 });
 
 
-export const toggleFavorite = createAsyncThunk<
-  { status: 'added' | 'removed'; productId: string },
-  string,
-  { rejectValue: string }
->('nannies/toggleFavorite', async (productId, thunkAPI) => {
+export const toggleFavorite = createAsyncThunk('nannies/toggleFavorite', async (productId: string, thunkAPI) => {
   try {
     const auth = getAuth();
     const user = auth.currentUser;

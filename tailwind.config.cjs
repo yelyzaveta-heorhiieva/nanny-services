@@ -8,9 +8,13 @@ module.exports = {
         auto: 'auto',
       },
       fontFamily: {
-        helvetica: ['"Helvetica Neue"', 'sans-serif'], 
+        helvetica: ['"Helvetica Neue"', 'sans-serif'],
       },
-    }
+      screens: {
+        xs: '320px', 
+        xls: '1440px'
+      },
+    },
   },
   plugins: [
     function ({ addUtilities }) {
@@ -21,7 +25,7 @@ module.exports = {
         '.text-decoration-skip-auto': {
           'text-decoration-skip-ink': 'auto',
         },
-      })
-    }
+      });
+    },
   ],
 };

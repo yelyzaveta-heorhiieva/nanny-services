@@ -58,6 +58,7 @@ const nanniesSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.currentIndex = 3;
+        state.isFirstLoad = true;
         state.loading = false;
         state.allNannies = action.payload || [];
         state.currentNannies =
@@ -91,6 +92,7 @@ const nanniesSlice = createSlice({
         state.loading = false;
       })
       .addCase(getFavorites.fulfilled, (state, action) => {
+        state.isFirstLoad = true;
         state.favorites = state.allNannies.filter((item) =>
           action.payload?.includes(item.id),
         );
