@@ -48,7 +48,7 @@ export default function FavoritesPage({}: FavoritesPageProps) {
               {currentFavorites?.map((item: NannieCardInterface) => (
                 <li
                   key={item.id}
-                  className='bg-[#fbfbfb] p-6 rounded-3xl flex gap-6 relative'
+                  className='bg-[#fbfbfb] sm:p-6 p-4 rounded-3xl flex xls:flex-row flex-col gap-6 relative'
                 >
                   <NannieCard item={item} />
                 </li>
