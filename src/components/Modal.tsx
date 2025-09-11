@@ -27,7 +27,7 @@ export default function Modal({ children, width }: ModalProps) {
     <div
       className='fixed top-0 left-0 w-full h-full bg-[rgba(11,11,11,0.6)] z-[1010]'
       onClick={(e: React.MouseEvent<HTMLDivElement>) =>
-        (e.target as HTMLElement).classList.contains('z-[999]') &&
+        (e.target as HTMLElement) === e.currentTarget &&
         dispatch(closeModal())
       }
     >
