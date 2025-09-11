@@ -22,9 +22,9 @@ const classNames = {
   input: () => 'font-normal leading-[125%] text-[#11101c]',
   menu: () =>
     'max-w-[150px] h-[180px] shadow-[0_20px_69px_0_rgba(0,0,0,0.07)] rounded-xl bg-white py-[14px] px-[18px] mt-2 right-0',
-  menuList: () => 'flex flex-col gap-2 ',
+  menuList: () => 'flex flex-col gap-1 ',
   option: (state: any) =>
-    `font-medium text-lg leading-[125%] font-helvetica text-center
+    `font-medium text-base leading-[125%] font-helvetica text-center
       ${
         state.isSelected
           ? 'text-[#11101c]'
@@ -49,7 +49,7 @@ const DropdownIndicator = (props: any) => (
 
 const CustomMenuList = (props: any) => (
   <components.MenuList {...props}>
-    <div className='font-medium leading-[150%] text-[#11101c] mb-4'>
+    <div className='font-medium leading-[150%] text-[#11101c] lg:mb-4 mb-2'>
       Meeting time
     </div>
     {props.children}

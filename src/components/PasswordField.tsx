@@ -12,6 +12,7 @@ export default function PasswordField({name }: PasswordFieldProps) {
     query: '(min-width: 1280)',
   });
 
+    console.log(show);
     
   return (
     <label className='block'>
@@ -26,7 +27,7 @@ export default function PasswordField({name }: PasswordFieldProps) {
         <button
         type='button'
         className='absolute top-[50%] right-4 translate-y-[-50%] cursor-pointer'
-        {...(isBigScreen
+        {...(!isBigScreen
           ? { onClick: () => setShow((prev) => !prev) }
           : {
               onMouseDownCapture: () => setShow(true),
