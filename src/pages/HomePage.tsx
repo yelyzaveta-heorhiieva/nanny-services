@@ -8,7 +8,7 @@ export interface HomePageProps {
 export default function HomePage({ }: HomePageProps) {
   return (
     <>
-      <div className='m-8 bg-[#103931] bg-[url(./assets/hero.png)] bg-no-repeat bg-right bg-contain rounded-[30px]'>
+      <div className='m-8 bg-[#103931] bg-[url(./assets/hero.png)] bg-no-repeat bg-right bg-contain rounded-[30px] '>
         <Container>
           <div className='h-[736px] flex flex-col justify-center relative pt-[88px]'>
             <div className='w-[517px] text-[#fbfbfb]'>

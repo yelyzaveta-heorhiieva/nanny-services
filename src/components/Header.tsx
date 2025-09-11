@@ -16,8 +16,11 @@ export default function Header({}: HeaderProps) {
 
   return (
     <div
-      className={`fixed z-[999] top-0 bg-[#103931] border-b-[rgba(251,251,251,0.4)] border-b border-solid ${
-        location.pathname === '/' && 'm-8 bg-transparent'
+      className={` bg-[#103931] border-b-[rgba(251,251,251,0.4)] 
+      border-b border-solid ${
+        location.pathname === '/'
+          ? 'm-8 bg-transparent absolute z-[899] top-0'
+          : 'fixed z-[899] top-0'
       }`}
     >
       <Container>

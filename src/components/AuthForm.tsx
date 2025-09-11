@@ -24,7 +24,6 @@ export interface FormValues {
 export default function AuthForm({}: AuthFormProps) {
   const loginFormIsOpen = useSelector(selectLoginFormIsOpen);
   const registerFormIsOpen = useSelector(selectRegisterFormIsOpen);
-
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const initialValues: FormValues = {

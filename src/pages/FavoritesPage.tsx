@@ -1,50 +1,49 @@
-import React, { useState } from 'react';
 import Container from '../components/Container';
-import { ref, get, query, orderByChild, equalTo } from 'firebase/database';
-import { db } from '../../firebase';
-import { getAuth } from 'firebase/auth';
-import { nanniesRef } from '../utils/queryParams';
-import { NannieCardInterface } from './NanniesPage';
+import { NannieCardInterface, OptionType } from './NanniesPage';
 import NannieCard from '../components/NannieCard';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectCurrentFavorites,
+  selectFavorites,
+  selectLoading,
+} from '../redux/selectors';
+import Filters, { options } from '../components/Filters';
+import { useEffect, useState } from 'react';
+import { SingleValue } from 'react-select';
+import { AppDispatch } from '../redux/store';
+import { optionSwitch } from '../utils/optionSwitch';
+import { fetchData } from '../redux/nanniesOperation';
+import LoadMoreBtn from '../components/LoadMoreBtn';
+import { loadMoreFavorites } from '../redux/nanniesSlice';
 
 export interface FavoritesPageProps {}
 
-export default function FavoritesPage({ }: FavoritesPageProps) {
-  const [favoritesNannies, setFavoritesNannies] = useState<NannieCardInterface[]>([]);
-  const getFavorites = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
+export default function FavoritesPage({}: FavoritesPageProps) {
+  const favorites = useSelector(selectFavorites);
+  const dispatch = useDispatch<AppDispatch>();
+  const loading = useSelector(selectLoading);
+  const currentFavorites = useSelector(selectCurrentFavorites);
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(
+    options[0],
+  );
 
-    if (user) {
-      const favRef = ref(db, `/users/${user.uid}/favorites`);
-      const snapshot = await get(favRef);
-      if (snapshot.exists()) {
-        const favoritesObj = snapshot.val(); // { productId1: true, productId2: true }
-        const favorites = Object.keys(favoritesObj); // ["productId1", "productId2"]
-        favorites.forEach(async (id) => {
-          const snapshot = await get(
-            query(nanniesRef, orderByChild('id'), equalTo(id)),
-          );
-          if (snapshot.exists()) {
-           setFavoritesNannies(prev=> [...prev, (snapshot.val()[id] as NannieCardInterface)]);
-          }
-        });
-      } else {
-        console.log('У користувача немає улюблених товарів');
-      }
-    }
+  const handleChange = (option: SingleValue<OptionType>) => {
+    setSelectedOption(option);
   };
 
-  console.log(favoritesNannies);
-  
+  useEffect(() => {
+    const opt = optionSwitch(
+      selectedOption || { value: 'all', label: 'Show all' },
+    );
+    dispatch(fetchData(opt));
+  }, [selectedOption]);
+
   return (
     <div className='mt-[88px]'>
       <Container>
-        <h1 onClick={getFavorites} className='text-lg'>
-          FavoritesPage
-        </h1>
+        <Filters handleChange={handleChange} selected={selectedOption} />
         <ul className='flex flex-col gap-8 pb-16 pt-8'>
-          {favoritesNannies.map((item: NannieCardInterface) => (
+          {currentFavorites?.map((item: NannieCardInterface) => (
             <li
               key={item.id}
               className='bg-[#fbfbfb] p-6 rounded-3xl flex gap-6 relative'
@@ -53,6 +52,9 @@ export default function FavoritesPage({ }: FavoritesPageProps) {
             </li>
           ))}
         </ul>
+        {!loading && currentFavorites.length < favorites.length && (
+          <LoadMoreBtn onClick={() => dispatch(loadMoreFavorites(favorites))} />
+        )}
       </Container>
     </div>
   );

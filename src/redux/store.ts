@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer, { AuthState } from './authSlice';
-import modalReducer from './modalSlice'
+import modalReducer from './modalSlice';
+import nanniesReducer, { NanniesState } from './nanniesSlice';
 import {
   persistStore,
   persistReducer,
@@ -18,10 +19,16 @@ export const persistedAuthReducer = persistReducer<AuthState>(
   authReducer,
 );
 
+export const persistedNanniesReducer = persistReducer<NanniesState>(
+  { key: 'favorite', storage },
+  nanniesReducer,
+);
+
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     modal: modalReducer,
+    nannies: persistedNanniesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
