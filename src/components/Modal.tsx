@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { closeModal } from '../redux/modalSlice';
+import { useMediaQuery } from 'react-responsive';
 
 export interface ModalProps {
   children: ReactElement;
@@ -10,6 +11,8 @@ export interface ModalProps {
 
 export default function Modal({ children, width = "565" }: ModalProps) {
   const dispatch = useDispatch<AppDispatch>();
+  const isBigScreen = useMediaQuery({ query: '(min-width: 1280px)' });
+
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -24,7 +27,7 @@ export default function Modal({ children, width = "565" }: ModalProps) {
 
   return (
     <div
-      className='fixed top-0 left-0 w-full h-full bg-[rgba(11,11,11,0.6)] z-[999]'
+      className='fixed top-0 left-0 w-full h-full bg-[rgba(11,11,11,0.6)] z-[1010]'
       onClick={(e: React.MouseEvent<HTMLDivElement>) =>
         (e.target as HTMLElement).classList.contains('z-[999]') &&
         dispatch(closeModal())
@@ -32,7 +35,7 @@ export default function Modal({ children, width = "565" }: ModalProps) {
     >
       <div
         className={`absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-[#fbfbfb] 
-      rounded-[30px] p-16 ${width} z-[1000]`}
+      rounded-[30px] xl:p-16 p-6 ${width} z-[1100]`}
       >
         <button
           type='button'

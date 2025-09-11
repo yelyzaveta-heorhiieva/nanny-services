@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 export interface NavItemProps { 
     link: string;
-    name: string;
+  name: string;
+  onClick?: () => void;
 }
 
 const buildLinkClass = ({ isActive }: { isActive: boolean }) => {
@@ -12,11 +13,11 @@ const buildLinkClass = ({ isActive }: { isActive: boolean }) => {
     : '';
 };
 
-export default function NavItem({link, name}: NavItemProps) {
+export default function NavItem({link, name, onClick}: NavItemProps) {
   return (
     <div>
       <li>
-        <NavLink to={link} className={buildLinkClass}>
+        <NavLink to={link} className={buildLinkClass} onClick={onClick}>
           {name}
         </NavLink>
       </li>

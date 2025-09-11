@@ -9,10 +9,10 @@ export default function Container({ children }: ContainerProps) {
   const location = useLocation();
   return (
     <div
-      className={`px-32  ${
+      className={`xls:px-24 px-8 ${
         location.pathname === '/'
-          ? 'max-w-[1376px] min-w-[1376px]'
-          : 'max-w-[1440px] min-w-[1440px]'
+          ? 'xls:max-w-[1376px] xls:min-w-[1376px] min-w-[288px]'
+          : 'xls:max-w-[1440px] xls:min-w-[1440px]'
       }`}
     >
       {children}
