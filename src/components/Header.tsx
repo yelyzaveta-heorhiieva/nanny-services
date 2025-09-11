@@ -31,7 +31,7 @@ export default function Header({}: HeaderProps) {
       className={` bg-[#103931] border-b-[rgba(251,251,251,0.4)]  
       border-b border-solid ${
         location.pathname === '/'
-          ? 'xls:m-8 m-4 bg-transparent absolute z-[899] top-0 min-w-[288px] w-[80vw]  xls:w-[1376px]'
+          ? 'xls:m-8 m-4 bg-transparent fixed z-[899] top-0 min-w-[288px] w-[80vw]  xls:w-[1376px]'
           : 'fixed z-[899] top-0 left-0 min-w-[320px] w-full xls:min-w-[1440px]'
       }`}
     >
