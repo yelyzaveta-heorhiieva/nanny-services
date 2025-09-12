@@ -15,6 +15,5 @@ export const selectCurrentNannies = (state: RootState) => state.nannies.currentN
 export const selectCurrentIndex = (state: RootState) => state.nannies.currentIndex;
 export const selectLoading = (state: RootState) => state.nannies.loading;
 export const selectError = (state: RootState) => state.nannies.error;
-export const selectIsFirstLoad = (state: RootState) => state.nannies.isFirstLoad;
 export const selectCurrentFavorites = (state: RootState) =>
   state.nannies.currentFavorites;
