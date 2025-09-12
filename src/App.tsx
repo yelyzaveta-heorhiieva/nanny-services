@@ -10,9 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from './redux/store';
 import {
   selectAllNannies,
-  selectCurrentFavorites,
-  selectCurrentNannies,
-  selectIsFirstLoad,
   selectIsLogged,
   selectLoading,
 } from './redux/selectors';
@@ -25,9 +22,6 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
   const isLoggedIn = useSelector(selectIsLogged);
   const allNannies = useSelector(selectAllNannies);
-  const isFirstLoad = useSelector(selectIsFirstLoad);
-  const currentNannies = useSelector(selectCurrentNannies);
-  const currentFavorites = useSelector(selectCurrentFavorites);
   const loading = useSelector(selectLoading);
  
 
@@ -37,14 +31,6 @@ function App() {
     }
   }, [dispatch, isLoggedIn, allNannies]);
 
-  useEffect(() => {
-    if (!isFirstLoad) {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  }, [currentNannies, currentFavorites, isFirstLoad]);
 
   return (
     <>

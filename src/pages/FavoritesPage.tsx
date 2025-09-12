@@ -16,6 +16,7 @@ import { optionSwitch } from '../utils/optionSwitch';
 import { fetchData } from '../redux/nanniesOperation';
 import LoadMoreBtn from '../components/LoadMoreBtn';
 import { loadMoreFavorites } from '../redux/nanniesSlice';
+import ScrollTopBtn from '../components/ScrollTopBtn';
 
 export interface FavoritesPageProps {}
 
@@ -72,6 +73,7 @@ export default function FavoritesPage({}: FavoritesPageProps) {
             list.
           </p>
         )}
+        <ScrollTopBtn />
       </Container>
     </div>
   );

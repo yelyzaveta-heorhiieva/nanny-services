@@ -11,7 +11,6 @@ export interface NanniesState {
   currentNannies: NannieCardInterface[];
   currentFavorites: NannieCardInterface[];
   currentIndex: number;
-  isFirstLoad: boolean;
 }
 
 const initialState: NanniesState = {
@@ -22,7 +21,6 @@ const initialState: NanniesState = {
   currentIndex: 3,
   loading: false,
   error: null,
-  isFirstLoad: true,
 };
 
 const PAGE_SIZE = 3;
@@ -38,7 +36,6 @@ const nanniesSlice = createSlice({
       );
       state.currentNannies = [...state.currentNannies, ...nextPage];
       state.currentIndex = state.currentIndex + PAGE_SIZE;
-      state.isFirstLoad = false;
     },
     loadMoreFavorites(state, action) {
       const nextPage = action.payload.slice(
@@ -47,7 +44,6 @@ const nanniesSlice = createSlice({
       );
       state.currentFavorites = [...state.currentFavorites, ...nextPage];
       state.currentIndex = state.currentIndex + PAGE_SIZE;
-      state.isFirstLoad = false;
     },
   },
   extraReducers: (builder) => {
@@ -58,7 +54,6 @@ const nanniesSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.currentIndex = 3;
-        state.isFirstLoad = true;
         state.loading = false;
         state.allNannies = action.payload || [];
         state.currentNannies =
@@ -74,7 +69,6 @@ const nanniesSlice = createSlice({
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
         state.loading = false;
-        state.isFirstLoad = true;
         const { status, productId } = action.payload;
 
         if (status === 'added') {
@@ -93,7 +87,6 @@ const nanniesSlice = createSlice({
         state.loading = false;
       })
       .addCase(getFavorites.fulfilled, (state, action) => {
-        state.isFirstLoad = true;
         state.loading = false;
         state.favorites = state.allNannies.filter((item) =>
           action.payload?.includes(item.id),

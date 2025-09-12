@@ -17,6 +17,7 @@ import { AppDispatch } from '../redux/store';
 import { fetchData } from '../redux/nanniesOperation';
 import { loadMore } from '../redux/nanniesSlice';
 import LoadMoreBtn from '../components/LoadMoreBtn';
+import ScrollTopBtn from '../components/ScrollTopBtn';
 
 export interface NanniesPageProps {}
 
@@ -99,6 +100,7 @@ export default function NanniesPage({ }: NanniesPageProps) {
         {!loading && currentNannies.length < nannies.length && (
           <LoadMoreBtn onClick={() => dispatch(loadMore(nannies))} />
         )}
+        <ScrollTopBtn />
       </Container>
     </div>
   );
