@@ -94,10 +94,17 @@ const nanniesSlice = createSlice({
       })
       .addCase(getFavorites.fulfilled, (state, action) => {
         state.isFirstLoad = true;
+        state.loading = false;
         state.favorites = state.allNannies.filter((item) =>
           action.payload?.includes(item.id),
         );
         state.currentFavorites = state.favorites.slice(0, state.currentIndex);
+      })
+      .addCase(getFavorites.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getFavorites.rejected, (state, action) => {
+        state.loading = false;
       })
       .addCase(logOut.fulfilled, (state, action) => {
         state.favorites = [];
