@@ -20,7 +20,7 @@ export const persistedAuthReducer = persistReducer<AuthState>(
 );
 
 export const persistedNanniesReducer = persistReducer<NanniesState>(
-  { key: 'favorite', storage },
+  { key: 'favorites', storage, whitelist: ['favorites'] },
   nanniesReducer,
 );
 

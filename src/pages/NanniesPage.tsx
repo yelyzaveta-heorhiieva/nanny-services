@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import NannieCard from '../components/NannieCard';
-import Loader from '../components/Loader';
 import Filters, { options } from '../components/Filters';
 import { SingleValue } from 'react-select';
-import { optionSwitch } from '../utils/optionSwitch';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectAllNannies,
-  selectCurrentNannies,
-
+  selectCursor,
+  selectHasMore,
+  selectItems,
   selectLoading,
   selectModalIsOpen,
 } from '../redux/selectors';
 import { AppDispatch } from '../redux/store';
-import { fetchData } from '../redux/nanniesOperation';
-import { loadMore } from '../redux/nanniesSlice';
+import { fetchData, loadMore } from '../redux/nanniesOperation';
 import LoadMoreBtn from '../components/LoadMoreBtn';
 import ScrollTopBtn from '../components/ScrollTopBtn';
+import { Cursor } from '../utils/newFilters';
 
 export interface NanniesPageProps {}
 
@@ -49,57 +47,68 @@ export interface NannieCardInterface {
 }
 
 export type Params = {
-  orderBy: string;
-  order: string;
-  startAt?: number;
-  endAt?: number;
+  filter: string;
+  cursor: Cursor;
+  pageSize: number;
+  favorites?: string[];
 };
 
-export default function NanniesPage({ }: NanniesPageProps) {
+export default function NanniesPage({}: NanniesPageProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const nannies = useSelector(selectAllNannies);
-  const currentNannies = useSelector(selectCurrentNannies);
+  const items = useSelector(selectItems);
+  const cursor = useSelector(selectCursor);
+  const hasMore = useSelector(selectHasMore);
   const loading = useSelector(selectLoading);
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(
     options[0],
   );
-   const modalIsOpen = useSelector(selectModalIsOpen);
+  const modalIsOpen = useSelector(selectModalIsOpen);
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
   };
 
+
+  async function loadNext() {
+    if (!cursor) return;
+    dispatch(
+      loadMore({
+        filter: selectedOption?.value || 'all',
+        cursor,
+        pageSize: 3,
+      }))
+  }
+
+
   useEffect(() => {
-    const opt = optionSwitch(
-      selectedOption || { value: 'all', label: 'Show all' },
-    );
-    dispatch(fetchData(opt));
+ dispatch(
+   fetchData({
+     filter: selectedOption?.value || 'all',
+     cursor: null,
+     pageSize: 3,
+   }),
+ );
   }, [selectedOption]);
 
   return (
     <div
       className={`min-w-[320px] w-[100vw] ${
-        modalIsOpen
-          ? 'overflow-clip mt-0 h-[100vh]'
-          : 'mt-[88px]'
+        modalIsOpen ? 'overflow-clip mt-0 h-[100vh]' : 'mt-[88px]'
       }`}
     >
       <Container>
         <Filters handleChange={handleChange} selected={selectedOption} />
         <ul className='flex flex-col gap-8 pb-16 pt-8'>
-          {
-            currentNannies.map((item: NannieCardInterface) => (
-              <li
-                key={item.id}
-                className='bg-[#fbfbfb] sm:p-6 p-4 rounded-3xl flex xls:flex-row flex-col gap-6 relative'
-              >
-                <NannieCard item={item} />
-              </li>
-            ))}
+          {items.map((item: NannieCardInterface) => (
+            <li
+              key={item.id}
+              className='bg-[#fbfbfb] sm:p-6 p-4 rounded-3xl flex xls:flex-row flex-col gap-6 relative'
+            >
+              <NannieCard item={item} />
+            </li>
+          ))}
         </ul>
-        {!loading && currentNannies.length < nannies.length && (
-          <LoadMoreBtn onClick={() => dispatch(loadMore(nannies))} />
-        )}
+        {!loading && hasMore && <LoadMoreBtn onClick={loadNext} />}
         <ScrollTopBtn />
       </Container>
     </div>

@@ -69,7 +69,7 @@ export default function Header({}: HeaderProps) {
 
           {(registerFormIsOpen || loginFormIsOpen) && (
             <Modal
-              width={
+              classes={
                 isMediumScreen ? 'max-w-[565px] min-w-[288px]' : 'w-[288px]'
               }
             >

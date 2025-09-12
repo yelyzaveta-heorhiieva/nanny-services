@@ -9,7 +9,7 @@ import { getFavorites } from './redux/nanniesOperation';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from './redux/store';
 import {
-  selectAllNannies,
+  selectItems,
   selectIsLogged,
   selectLoading,
 } from './redux/selectors';
@@ -21,7 +21,7 @@ const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   const isLoggedIn = useSelector(selectIsLogged);
-  const allNannies = useSelector(selectAllNannies);
+  const items = useSelector(selectItems);
   const loading = useSelector(selectLoading);
  
 
@@ -29,7 +29,7 @@ function App() {
     if (isLoggedIn) {
       dispatch(getFavorites());
     }
-  }, [dispatch, isLoggedIn, allNannies]);
+  }, [dispatch, isLoggedIn, items]);
 
 
   return (

@@ -1,16 +1,25 @@
-
 import Select, { SingleValue } from 'react-select';
 import { OptionType } from '../pages/NanniesPage';
 import { useSelector } from 'react-redux';
 import { selectModalIsOpen } from '../redux/selectors';
 
+// export const options = [
+//   { value: 'fromAtoZ', label: 'A to Z' },
+//   { value: 'fromZtoA', label: 'Z to A' },
+//   { value: 'lessPrice', label: 'Less than 17$' },
+//   { value: 'greaterPrice', label: 'Greater than 17$' },
+//   { value: 'popular', label: 'Popular' },
+//   { value: 'notPopular', label: 'Not popular' },
+//   { value: 'all', label: 'Show all' },
+// ];
+
 export const options = [
-  { value: 'fromAtoZ', label: 'A to Z' },
-  { value: 'fromZtoA', label: 'Z to A' },
-  { value: 'lessPrice', label: 'Less than 17$' },
-  { value: 'greaterPrice', label: 'Greater than 17$' },
-  { value: 'popular', label: 'Popular' },
-  { value: 'notPopular', label: 'Not popular' },
+  { value: 'alphabetAsc', label: 'A to Z' },
+  { value: 'alphabetDesc', label: 'Z to A' },
+  { value: 'priceLess17', label: 'Less than 17$' },
+  { value: 'priceMore17', label: 'Greater than 17$' },
+  { value: 'popularityDesc', label: 'Popular' },
+  { value: 'popularityAsc', label: 'Not popular' },
   { value: 'all', label: 'Show all' },
 ];
 
@@ -43,7 +52,6 @@ const classNames = {
     'font-medium text-lg leading-[111%] text-[#fbfbfb] font-helvetica',
   dropdownIndicator: () => 'text-[#fbfbfb]',
 };
-
 
 export default function Filters({ handleChange, selected }: FiltersProps) {
   const modalIsOpen = useSelector(selectModalIsOpen);

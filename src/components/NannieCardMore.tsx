@@ -43,8 +43,10 @@ export default function NannieCardMore({ item }: NannieCardMoreProps) {
       </button>
       {popUpIsOpen && (
         <Modal
-          width={
-            isMediumScreen ? 'max-w-[599px] min-w-[288px]' : 'w-[288px]'
+          classes={
+            isMediumScreen
+              ? 'max-w-[599px] min-w-[288px]'
+              : 'w-[288px] max-h-[860px] h-[80vh]'
           }
         >
           <PopUp item={item} />

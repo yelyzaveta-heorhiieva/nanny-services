@@ -1,50 +1,50 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { logOut } from './authOperations';
 import { NannieCardInterface } from '../pages/NanniesPage';
-import { fetchData, getFavorites, toggleFavorite } from './nanniesOperation';
+import { fetchData, getFavorites, loadMore, toggleFavorite } from './nanniesOperation';
+import { Cursor } from '../utils/newFilters';
 
 export interface NanniesState {
   favorites: NannieCardInterface[];
   loading: boolean;
   error: string | null;
-  allNannies: NannieCardInterface[];
-  currentNannies: NannieCardInterface[];
-  currentFavorites: NannieCardInterface[];
-  currentIndex: number;
+  items: NannieCardInterface[];
+  cursor: Cursor;
+  hasMore: boolean;
 }
 
 const initialState: NanniesState = {
   favorites: [],
-  allNannies: [],
-  currentNannies: [],
-  currentFavorites: [],
-  currentIndex: 3,
+  items: [],
+  cursor: null,
+  hasMore: false,
   loading: false,
   error: null,
 };
-
-const PAGE_SIZE = 3;
 
 const nanniesSlice = createSlice({
   name: 'nannies',
   initialState,
   reducers: {
-    loadMore(state, action) {
-      const nextPage = action.payload.slice(
-        state.currentIndex,
-        state.currentIndex + PAGE_SIZE,
-      );
-      state.currentNannies = [...state.currentNannies, ...nextPage];
-      state.currentIndex = state.currentIndex + PAGE_SIZE;
-    },
-    loadMoreFavorites(state, action) {
-      const nextPage = action.payload.slice(
-        state.currentIndex,
-        state.currentIndex + PAGE_SIZE,
-      );
-      state.currentFavorites = [...state.currentFavorites, ...nextPage];
-      state.currentIndex = state.currentIndex + PAGE_SIZE;
-    },
+    resetCursor(state) {
+      state.cursor = null;
+    }
+    // loadMore(state, action) {
+    //   const nextPage = action.payload.slice(
+    //     state.currentIndex,
+    //     state.currentIndex + PAGE_SIZE,
+    //   );
+    //   state.currentNannies = [...state.currentNannies, ...nextPage];
+    //   state.currentIndex = state.currentIndex + PAGE_SIZE;
+    // },
+    // loadMoreFavorites(state, action) {
+    //   const nextPage = action.payload.slice(
+    //     state.currentIndex,
+    //     state.currentIndex + PAGE_SIZE,
+    //   );
+    //   state.currentFavorites = [...state.currentFavorites, ...nextPage];
+    //   state.currentIndex = state.currentIndex + PAGE_SIZE;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -53,13 +53,26 @@ const nanniesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchData.fulfilled, (state, action) => {
-        state.currentIndex = 3;
+        state.items = action.payload.items;
+        state.cursor = action.payload.nextCursor;
+        state.hasMore = action.payload.hasMore;
         state.loading = false;
-        state.allNannies = action.payload || [];
-        state.currentNannies =
-          state.allNannies?.slice(0, state.currentIndex) || [];
       })
       .addCase(fetchData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(loadMore.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loadMore.fulfilled, (state, action) => {
+        state.items = [...state.items, ...action.payload.items];
+        state.cursor = action.payload.nextCursor;
+        state.hasMore = action.payload.hasMore;
+        state.loading = false;
+      })
+      .addCase(loadMore.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
@@ -72,7 +85,7 @@ const nanniesSlice = createSlice({
         const { status, productId } = action.payload;
 
         if (status === 'added') {
-          const item: NannieCardInterface[] = state.allNannies.filter(
+          const item: NannieCardInterface[] = state.items.filter(
             (item) => item.id === productId,
           );
           state.favorites?.push(...item);
@@ -80,7 +93,6 @@ const nanniesSlice = createSlice({
           state.favorites =
             state.favorites?.filter((item) => item.id !== productId) || [];
         }
-        state.currentFavorites = state.favorites.slice(0, state.currentIndex);
       })
       .addCase(toggleFavorite.rejected, (state, action) => {
         state.error = action.payload as string;
@@ -88,10 +100,7 @@ const nanniesSlice = createSlice({
       })
       .addCase(getFavorites.fulfilled, (state, action) => {
         state.loading = false;
-        state.favorites = state.allNannies.filter((item) =>
-          action.payload?.includes(item.id),
-        );
-        state.currentFavorites = state.favorites.slice(0, state.currentIndex);
+        state.favorites = action.payload
       })
       .addCase(getFavorites.pending, (state, action) => {
         state.loading = true;
@@ -105,6 +114,6 @@ const nanniesSlice = createSlice({
   },
 });
 
-export const { loadMore, loadMoreFavorites } = nanniesSlice.actions;
+export const { resetCursor } = nanniesSlice.actions;
 
 export default nanniesSlice.reducer;
