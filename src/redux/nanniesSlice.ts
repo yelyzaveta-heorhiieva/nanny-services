@@ -26,25 +26,6 @@ const nanniesSlice = createSlice({
   name: 'nannies',
   initialState,
   reducers: {
-    resetCursor(state) {
-      state.cursor = null;
-    }
-    // loadMore(state, action) {
-    //   const nextPage = action.payload.slice(
-    //     state.currentIndex,
-    //     state.currentIndex + PAGE_SIZE,
-    //   );
-    //   state.currentNannies = [...state.currentNannies, ...nextPage];
-    //   state.currentIndex = state.currentIndex + PAGE_SIZE;
-    // },
-    // loadMoreFavorites(state, action) {
-    //   const nextPage = action.payload.slice(
-    //     state.currentIndex,
-    //     state.currentIndex + PAGE_SIZE,
-    //   );
-    //   state.currentFavorites = [...state.currentFavorites, ...nextPage];
-    //   state.currentIndex = state.currentIndex + PAGE_SIZE;
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -113,7 +94,5 @@ const nanniesSlice = createSlice({
       });
   },
 });
-
-export const { resetCursor } = nanniesSlice.actions;
 
 export default nanniesSlice.reducer;

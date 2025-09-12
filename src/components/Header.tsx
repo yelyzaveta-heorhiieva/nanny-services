@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import AuthForm from './AuthForm';
 import {
   selectLoginFormIsOpen,
-  selectModalIsOpen,
   selectRegisterFormIsOpen,
 } from '../redux/selectors';
 import UserActions from './UserActions';

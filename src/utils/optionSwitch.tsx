@@ -1,22 +1,28 @@
-import { OptionType } from "../pages/NanniesPage";
+import { NannieCardInterface, OptionType } from "../pages/NanniesPage";
 
-export const optionSwitch = (selectedOption: OptionType) => {
+export const optionSwitch = (selectedOption: OptionType | null, data: NannieCardInterface[]) => {
   switch (selectedOption?.value) {
-    case 'fromAtoZ':
-      return { orderBy: 'name', order: 'inc' };
-    case 'fromZtoA':
-      return { orderBy: 'name', order: 'desc' };
+    case 'alphabetAsc':
+      return data.toSorted((a, b) => a.name.toLowerCase().localeCompare(b.name.toLocaleLowerCase()));
+    case 'alphabetDesc':
+            return data.toSorted((a, b) =>
+              b.name.toLowerCase().localeCompare(a.name.toLocaleLowerCase()),
+            );
+    case 'priceLess17':
+      return data.filter(item=>item.price_per_hour < 17)
+    case 'priceMore17':
+       return data.filter((item) => item.price_per_hour >= 17);
+    case 'popularityDesc':
+       return data.toSorted((a, b) => b.rating - a.rating);
+    case 'popularityAsc':
+       return data.toSorted((a, b) => a.rating - b.rating );
     case 'all':
-      return { orderBy: 'id', order: 'inc' };
-    case 'popular':
-      return { orderBy: 'rating', order: 'desc' };
-    case 'notPopular':
-      return { orderBy: 'rating', order: 'inc' };
-    case 'lessPrice':
-      return { orderBy: 'price_per_hour', order: 'inc', endAt: 17 };
-    case 'greaterPrice':
-      return { orderBy: 'price_per_hour', order: 'inc', startAt: 18 };
+       return data.toSorted((a, b) =>
+         a.id.toLowerCase().localeCompare(b.id.toLocaleLowerCase()),
+       );
     default:
-      return { orderBy: 'id', order: 'inc' };
+       return data.toSorted((a, b) =>
+         a.id.toLowerCase().localeCompare(b.id.toLocaleLowerCase()),
+       );
   }
 };

@@ -3,16 +3,6 @@ import { OptionType } from '../pages/NanniesPage';
 import { useSelector } from 'react-redux';
 import { selectModalIsOpen } from '../redux/selectors';
 
-// export const options = [
-//   { value: 'fromAtoZ', label: 'A to Z' },
-//   { value: 'fromZtoA', label: 'Z to A' },
-//   { value: 'lessPrice', label: 'Less than 17$' },
-//   { value: 'greaterPrice', label: 'Greater than 17$' },
-//   { value: 'popular', label: 'Popular' },
-//   { value: 'notPopular', label: 'Not popular' },
-//   { value: 'all', label: 'Show all' },
-// ];
-
 export const options = [
   { value: 'alphabetAsc', label: 'A to Z' },
   { value: 'alphabetDesc', label: 'Z to A' },

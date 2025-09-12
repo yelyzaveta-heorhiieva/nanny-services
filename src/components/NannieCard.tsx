@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { NannieCardInterface } from '../pages/NanniesPage';
 import NannieFeature from './NannieFeature';
 import NanniePoint from './NanniePoint';
 import { getAge } from '../utils/getAge';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFavorites, selectIsLogged } from '../redux/selectors';
-import toast from 'react-hot-toast';
+import { selectFavorites } from '../redux/selectors';
 import NannieCardMore from './NannieCardMore';
 import { AppDispatch } from '../redux/store';
 import { toggleFavorite } from '../redux/nanniesOperation';

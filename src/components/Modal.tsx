@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { closeModal } from '../redux/modalSlice';
-import { useMediaQuery } from 'react-responsive';
+
 
 export interface ModalProps {
   children: ReactElement;
