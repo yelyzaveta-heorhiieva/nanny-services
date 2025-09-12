@@ -44,6 +44,8 @@ export default function NannieCard({ item }: NannieCardProps) {
         <img
           src={avatar_url}
           alt={name}
+          width='24'
+          height='24'
           className='w-24 max-h-24 rounded-[15px]'
         />
         <svg width='14' height='14' className='absolute top-[9px] right-[14px]'>
