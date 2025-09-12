@@ -74,6 +74,7 @@ const nanniesSlice = createSlice({
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
         state.loading = false;
+        state.isFirstLoad = true;
         const { status, productId } = action.payload;
 
         if (status === 'added') {

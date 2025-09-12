@@ -6,6 +6,7 @@ import {
   selectCurrentFavorites,
   selectFavorites,
   selectLoading,
+  selectModalIsOpen,
 } from '../redux/selectors';
 import Filters, { options } from '../components/Filters';
 import { useEffect, useState } from 'react';
@@ -26,6 +27,7 @@ export default function FavoritesPage({}: FavoritesPageProps) {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(
     options[0],
   );
+  const modalIsOpen = useSelector(selectModalIsOpen);
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
@@ -39,7 +41,11 @@ export default function FavoritesPage({}: FavoritesPageProps) {
   }, [selectedOption]);
 
   return (
-    <div className='mt-[88px]'>
+    <div className={`min-w-[320px] w-full ${
+        modalIsOpen
+          ? 'overflow-clip mt-0 h-[100vh]'
+          : 'mt-[88px]'
+      }`}>
       <Container>
         {currentFavorites.length > 0 ? (
           <>

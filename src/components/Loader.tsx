@@ -4,16 +4,16 @@ export interface LoaderProps {}
 
 export default function Loader({}: LoaderProps) {
   return (
-    <div>
-      <Circles
-        height='60'
-        width='60'
-        color='#103931'
-        ariaLabel='circles-loading'
-        wrapperStyle={{}}
-        wrapperClass='justify-center'
-        visible={true}
-      />
+    <div className='fixed top-0 left-0 w-full h-full bg-[rgba(11,11,11,0.2)] z-[1010]'>
+        <Circles
+          height='60'
+          width='60'
+          color='#103931'
+          ariaLabel='circles-loading'
+          wrapperStyle={{}}
+          wrapperClass='items-center w-full h-full justify-center'
+          visible={true}
+        />
     </div>
   );
 }

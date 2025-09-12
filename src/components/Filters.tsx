@@ -1,6 +1,8 @@
 
 import Select, { SingleValue } from 'react-select';
 import { OptionType } from '../pages/NanniesPage';
+import { useSelector } from 'react-redux';
+import { selectModalIsOpen } from '../redux/selectors';
 
 export const options = [
   { value: 'fromAtoZ', label: 'A to Z' },
@@ -44,8 +46,9 @@ const classNames = {
 
 
 export default function Filters({ handleChange, selected }: FiltersProps) {
+  const modalIsOpen = useSelector(selectModalIsOpen);
   return (
-    <div className='mt-[152px]'>
+    <div className={`${modalIsOpen ? 'mt-0' : 'mt-[152px]'}`}>
       <label className='font-medium text-sm leading-[129%] text-[#8a8a89]'>
         Filters
         <Select

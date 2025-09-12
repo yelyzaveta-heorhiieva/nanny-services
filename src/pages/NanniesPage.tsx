@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectAllNannies,
   selectCurrentNannies,
-  selectError,
+
   selectLoading,
+  selectModalIsOpen,
 } from '../redux/selectors';
 import { AppDispatch } from '../redux/store';
 import { fetchData } from '../redux/nanniesOperation';
@@ -53,15 +54,15 @@ export type Params = {
   endAt?: number;
 };
 
-export default function NanniesPage({}: NanniesPageProps) {
+export default function NanniesPage({ }: NanniesPageProps) {
   const dispatch = useDispatch<AppDispatch>();
   const nannies = useSelector(selectAllNannies);
   const currentNannies = useSelector(selectCurrentNannies);
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(
     options[0],
   );
+   const modalIsOpen = useSelector(selectModalIsOpen);
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
@@ -75,11 +76,17 @@ export default function NanniesPage({}: NanniesPageProps) {
   }, [selectedOption]);
 
   return (
-    <div className='mt-[88px] min-w-[320px] w-full'>
+    <div
+      className={`min-w-[320px] w-[100vw] ${
+        modalIsOpen
+          ? 'overflow-clip mt-0 h-[100vh]'
+          : 'mt-[88px]'
+      }`}
+    >
       <Container>
         <Filters handleChange={handleChange} selected={selectedOption} />
         <ul className='flex flex-col gap-8 pb-16 pt-8'>
-          {!loading &&
+          {
             currentNannies.map((item: NannieCardInterface) => (
               <li
                 key={item.id}
@@ -92,7 +99,6 @@ export default function NanniesPage({}: NanniesPageProps) {
         {!loading && currentNannies.length < nannies.length && (
           <LoadMoreBtn onClick={() => dispatch(loadMore(nannies))} />
         )}
-        {loading && <Loader />}
       </Container>
     </div>
   );

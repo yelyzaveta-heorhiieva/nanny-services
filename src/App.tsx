@@ -1,11 +1,11 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect} from 'react';
 import Loader from './components/Loader';
 import NotFoundPage from './pages/NotFoundPage';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import './app.css';
 import PrivateRoute from './components/PrivateRoute';
-import { fetchData, getFavorites } from './redux/nanniesOperation';
+import { getFavorites } from './redux/nanniesOperation';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from './redux/store';
 import {
@@ -14,11 +14,8 @@ import {
   selectCurrentNannies,
   selectIsFirstLoad,
   selectIsLogged,
+  selectLoading,
 } from './redux/selectors';
-import { SingleValue } from 'react-select';
-import { OptionType } from './pages/NanniesPage';
-import { options } from './components/Filters';
-import { optionSwitch } from './utils/optionSwitch';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const NanniesPage = lazy(() => import('./pages/NanniesPage'));
@@ -31,6 +28,8 @@ function App() {
   const isFirstLoad = useSelector(selectIsFirstLoad);
   const currentNannies = useSelector(selectCurrentNannies);
   const currentFavorites = useSelector(selectCurrentFavorites);
+  const loading = useSelector(selectLoading);
+ 
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -63,6 +62,7 @@ function App() {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      {loading && <Loader />}
     </>
   );
 }
