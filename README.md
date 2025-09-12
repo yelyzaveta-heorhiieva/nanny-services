@@ -7,11 +7,11 @@ Built with React, TypeScript, Tailwind CSS, Firebase.
 
 - 🔐 Authentication – users can sign up, log in, and access private content  
 - ⭐ Favorites Page (Private Route)  
- - Client-side filtering & pagination  
- - Available only for authenticated users  
+  - Client-side filtering & pagination  
+  - Available only for authenticated users  
 - 👩‍👧 Nannies Page  
- - Server-side filtering & pagination (via Firebase queries)  
- - Browse and search available nannies  
+  - Server-side filtering & pagination (via Firebase queries)  
+  - Browse and search available nannies  
 - 📄 Pagination & load more for smooth browsing experience    
 - 🗺 Routing with React Router  
 - 🎨 Responsive UI powered by Tailwind CSS  
