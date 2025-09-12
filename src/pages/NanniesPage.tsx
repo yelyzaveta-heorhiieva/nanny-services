@@ -98,7 +98,7 @@ export default function NanniesPage({}: NanniesPageProps) {
     >
       <Container>
         <Filters handleChange={handleChange} selected={selectedOption} />
-        <ul className='flex flex-col gap-8 pb-16 pt-8'>
+        {items && <ul className='flex flex-col gap-8 pb-16 pt-8'>
           {items.map((item: NannieCardInterface) => (
             <li
               key={item.id}
@@ -107,7 +107,7 @@ export default function NanniesPage({}: NanniesPageProps) {
               <NannieCard item={item} />
             </li>
           ))}
-        </ul>
+        </ul>}
         {!loading && hasMore && <LoadMoreBtn onClick={loadNext} />}
         <ScrollTopBtn />
       </Container>

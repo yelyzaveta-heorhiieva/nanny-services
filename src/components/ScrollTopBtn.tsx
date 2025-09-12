@@ -13,7 +13,7 @@ export default function ScrollTopBtn({ }: ScrollTopBtnProps) {
   return (
     <button
       type='button'
-      className='bg-[#103931] rounded-full w-12 h-12 flex items-center justify-center absolute md:bottom-[80px] bottom-[40px] right-10'
+      className='bg-[#103931] rounded-full w-12 h-12 flex items-center justify-center fixed md:bottom-[80px] bottom-[40px] right-10'
       onClick={handleClick}
     >
       <svg width='26' height='26' className='fill-white'>
