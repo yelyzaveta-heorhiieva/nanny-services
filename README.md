@@ -5,17 +5,17 @@ Built with React, TypeScript, Tailwind CSS, Firebase.
 
 ## Features ✨
 
-🔐 Authentication – users can sign up, log in, and access private content
-⭐ Favorites Page (Private Route)
+🔐 Authentication – users can sign up, log in, and access private content  
+⭐ Favorites Page (Private Route)  
  - Client-side filtering & pagination
  - Available only for authenticated users
-👩‍👧 Nannies Page
+👩‍👧 Nannies Page  
  - Server-side filtering & pagination (via Firebase queries)
  - Browse and search available nannies
-📄 Pagination & load more for smooth browsing experience
-🗺 Routing with React Router
-🎨 Responsive UI powered by Tailwind CSS
-☁️ Real-time data with Firebase Realtime Database
+📄 Pagination & load more for smooth browsing experienc  
+🗺 Routing with React Router  
+🎨 Responsive UI powered by Tailwind CSS  
+☁️ Real-time data with Firebase Realtime Database  
 
 ## Tech Stack 🛠
 
@@ -32,12 +32,12 @@ Built with React, TypeScript, Tailwind CSS, Firebase.
 
 ## Project Structure 📂
 src/
-├── assets/ # images
-├── components/ # Reusable UI components
-├── fonts/
-├── pages/ # Application pages
-├── redux/ # Redux slices & async operations
-└── utils/ # Helper functions
+├── assets/ # images  
+├── components/ # Reusable UI components  
+├── fonts/  
+├── pages/ # Application pages  
+├── redux/ # Redux slices & async operations  
+└── utils/ # Helper functions  
 
 ## 👩‍💻 Author
 
