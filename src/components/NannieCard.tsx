@@ -103,7 +103,7 @@ export default function NannieCard({ item }: NannieCardProps) {
           height='26'
           className={` stroke-[2px]  ${
             favorites?.some((i) => i.id === id)
-              ? 'stroke-[#103931] fill-[#103931]'
+              ? 'stroke-[var(--main)] fill-[var(--main)]'
               : 'stroke-[#11101C] fill-transparent'
           }`}
         >

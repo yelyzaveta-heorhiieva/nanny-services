@@ -7,7 +7,7 @@ export interface HomePageProps {
 
 export default function HomePage({ }: HomePageProps) {
   return (
-    <div className='xls:m-8 m-4 min-w-[288px] w-[80vw] xls:w-[1376px] bg-[#103931] bg-[url(./assets/hero.png)] retina:bg-[url(./assets/hero@2x.png)]  bg-no-repeat lg:bg-right bg-top xl:bg-contain bg-cover rounded-[30px] '>
+    <div className='xls:m-8 m-4 min-w-[288px] w-[80vw] xls:w-[1376px] bg-[var(--main)] bg-[url(./assets/hero.png)] retina:bg-[url(./assets/hero@2x.png)]  bg-no-repeat lg:bg-right bg-top xl:bg-contain bg-cover rounded-[30px] '>
       <Container>
         <div className='lg:h-[736px] h-[90vh] flex flex-col gap-2 xls:justify-center justify-end relative xls:pt-[88px]'>
           <div className='xls:w-[517px] md:w-[280px] w-full text-[rgb(251,251,251)] mb-[200px] xls:m-0'>
@@ -41,7 +41,7 @@ export default function HomePage({ }: HomePageProps) {
             </Link>
           </div>
           <div className='absolute bg-[#fbfbfb] rounded-[20px] xls:p-8 p-4 bottom-[50px] xls:right-[-46px] right-0 flex items-center gap-4'>
-            <div className='w-[54px] h-[54px] flex justify-center items-center bg-[#103931] rounded-[13px]'>
+            <div className='w-[54px] h-[54px] flex justify-center items-center bg-[var(--main)] rounded-[13px]'>
               <svg width='20' height='16'>
                 <use href='/icons.svg#check'></use>
               </svg>

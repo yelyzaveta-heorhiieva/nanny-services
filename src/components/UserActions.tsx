@@ -24,7 +24,7 @@ export default function UserActions({onClick}: UserActionsProps) {
         <>
           <p className='flex items-center gap-[14px] xl:mr-6 mb-8 xl:mb-0 font-medium text-lg leading-[111%] tracking-[-0.01em] text-[#fbfbfb]'>
             <span className='flex items-center justify-center size-10 bg-[#fbfbfb] rounded-[10px]'>
-              <svg width='16' height='16' className='fill-[#103931]'>
+              <svg width='16' height='16' className='fill-[var(--main)]'>
                 <use href='/icons.svg#user'></use>
               </svg>
             </span>
@@ -38,7 +38,7 @@ export default function UserActions({onClick}: UserActionsProps) {
             }
             type='button'
             className='border w-[134px] h-12 flex justify-center items-center rounded-[30px] border-solid
-             border-[rgba(251,251,251,0.4)] hover:bg-[#fbfbfb] hover:text-[#103931] duration-300'
+             border-[rgba(251,251,251,0.4)] hover:bg-[#fbfbfb] hover:text-[var(--main)] duration-300'
           >
             Log out
           </button>
@@ -54,7 +54,7 @@ export default function UserActions({onClick}: UserActionsProps) {
                 }
               type='button'
               className='border w-[124px] h-12 flex justify-center items-center rounded-[30px] border-solid border-[rgba(251,251,251,0.4)]
-              hover:bg-[#fbfbfb] hover:text-[#103931] duration-300'
+              hover:bg-[#fbfbfb] hover:text-[var(--main)] duration-300'
             >
               Log In
             </button>
@@ -69,8 +69,8 @@ export default function UserActions({onClick}: UserActionsProps) {
               type='button'
               className={`w-[168px] h-12 px-10 py-3.5 rounded-[30px] border border-solid border-[rgba(251,251,251,0.4)] ${
                 location.pathname === '/' && isBigScreen &&
-                'bg-[#103931] hover:bg-[#fbfbfb] hover:text-[#103931] border-none'
-              } hover:bg-[#fbfbfb] hover:text-[#103931] duration-300`}
+                'bg-[var(--main)] hover:bg-[#fbfbfb] hover:text-[var(--main)] border-none'
+              } hover:bg-[#fbfbfb] hover:text-[var(--main)] duration-300`}
             >
               Registration
             </button>

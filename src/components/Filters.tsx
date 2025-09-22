@@ -20,14 +20,14 @@ export interface FiltersProps {
 
 const classNames = {
   container: () =>
-    'flex items-center justify-center w-[226px] h-12  rounded-[14px] bg-[#103931] border-none mt-2 ',
+    'flex items-center justify-center w-[226px] h-12  rounded-[14px] bg-[var(--main)] border-none mt-2 ',
   control: () =>
     'w-full border-none rounded-[14px] bg-transparent py-[14px] px-[18px] ',
   input: () =>
     'font-medium text-lg leading-[111%] text-[#fbfbfb] font-helvetica',
   valueContainer: () => '',
   menu: () =>
-    'w-[226px] h-[244px] shadow-[0_20px_69px_0_rgba(0,0,0,0.07)] bg-white rounded-[14px] py-[14px] px-[18px] mt-2',
+    'font-normal text-lg leading-[111%] font-helvetica w-[226px] h-[244px] shadow-[0_20px_69px_0_rgba(0,0,0,0.07)] bg-white rounded-[14px] py-[14px] px-[18px] mt-2',
   menuList: () => 'flex flex-col gap-3',
   option: (state: any) =>
     `font-normal text-lg leading-[111%] font-helvetica

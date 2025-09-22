@@ -163,7 +163,7 @@ export default function AppointmentForm({item}: AppointmentFormProps) {
             <button
               type='submit'
               disabled={!isValid || !dirty}
-              className={`w-full h-[52px] flex items-center justify-center bg-[#103931] rounded-[30px] font-medium leading-[125%] 
+              className={`w-full h-[52px] flex items-center justify-center bg-[var(--main)] rounded-[30px] font-medium leading-[125%] 
           tracking-[-0.01em] text-[#fbfbfb] ${
             (!dirty || !isValid) && 'bg-slate-600'
           }`}

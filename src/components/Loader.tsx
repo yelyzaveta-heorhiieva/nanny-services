@@ -8,7 +8,7 @@ export default function Loader({}: LoaderProps) {
         <Circles
           height='60'
           width='60'
-          color='#103931'
+          color='var(--main)'
           ariaLabel='circles-loading'
           wrapperStyle={{}}
           wrapperClass='items-center w-full h-full justify-center'

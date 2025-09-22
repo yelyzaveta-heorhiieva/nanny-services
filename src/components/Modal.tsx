@@ -34,7 +34,7 @@ export default function Modal({ children, classes }: ModalProps) {
     >
       <div
         className={`absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-[#fbfbfb] 
-      rounded-[30px] md:p-16 p-6 ${classes} z-[1100] overflow-y-scroll lg:overflow-visible`}
+      rounded-[30px] md:p-16 p-6 ${classes} z-[1100] overflow-y-scroll`}
       >
         <button
           type='button'

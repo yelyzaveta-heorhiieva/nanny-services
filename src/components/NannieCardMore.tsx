@@ -35,7 +35,7 @@ export default function NannieCardMore({ item }: NannieCardMoreProps) {
       </ul>
       <button
         type='button'
-        className='w-[215px] h-12 bg-[#103931] flex items-center justify-center rounded-[30px] 
+        className='w-[215px] h-12 bg-[var(--main)] flex items-center justify-center rounded-[30px] 
               font-medium leading-[125%] tracking-[-0.01em] text-[#fbfbfb]'
         onClick={handleClick}
       >
@@ -45,7 +45,7 @@ export default function NannieCardMore({ item }: NannieCardMoreProps) {
         <Modal
           classes={
             isMediumScreen
-              ? 'max-w-[599px] min-w-[288px]'
+              ? 'max-w-[599px] min-w-[288px] h-[80vh] max-h-[908px]'
               : 'w-[288px] max-h-[860px] h-[80vh]'
           }
         >

@@ -6,7 +6,7 @@ export default function ReviewItem({reviewer, rating, comment}: Review) {
   return (
     <>
       <div className='flex items-center gap-3 mb-4'>
-        <div className='w-11 h-11 bg-[rgba(16,57,49,0.2)] rounded-[100px] flex justify-center items-center font-medium text-xl leading-[100%] text-[#103931]'>
+        <div className='w-11 h-11 bg-[rgba(16,57,49,0.2)] rounded-[100px] flex justify-center items-center font-medium text-xl leading-[100%] text-[var(--main)]'>
           {reviewer.slice(0, 1)}
         </div>
         <div>

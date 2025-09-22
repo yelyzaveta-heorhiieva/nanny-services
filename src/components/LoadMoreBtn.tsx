@@ -15,7 +15,7 @@ export default function LoadMoreBtn({ onClick }: LoadMoreBtnProps) {
       onClick={onClick ?? undefined}
       disabled={loading}
       type='button'
-      className=' w-[159px] h-12 rounded-[30px] bg-[#103931] font-medium leading-[125%] tracking-[-0.01em] 
+      className=' w-[159px] h-12 rounded-[30px] bg-[var(--main)] font-medium leading-[125%] tracking-[-0.01em] 
             text-[#fbfbfb] mb-[100px] mx-auto'
     >
       Load more

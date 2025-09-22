@@ -80,7 +80,7 @@ export default function AuthForm({}: AuthFormProps) {
           <PasswordField name='password' />
           <button
             type='submit'
-            className='mt-[22px] w-full h-[52px] bg-[#103931] flex items-center justify-center 
+            className='mt-[22px] w-full h-[52px] bg-[var(--main)] flex items-center justify-center 
             rounded-[30px] font-medium text-base leading-[125%] tracking-[-0.01em] text-[#fbfbfb]'
           >
             {loginFormIsOpen ? 'Log In' : 'Sign up'}

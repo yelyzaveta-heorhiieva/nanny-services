@@ -27,7 +27,7 @@ export default function Header({}: HeaderProps) {
 
   return (
     <div
-      className={` bg-[#103931] border-b-[rgba(251,251,251,0.4)]  
+      className={` bg-[var(--main)] border-b-[rgba(251,251,251,0.4)]  
       border-b border-solid ${
         location.pathname === '/'
           ? 'xls:m-8 m-4 bg-transparent absolute z-[899] min-w-[288px] w-[80vw]  xls:w-[1376px]'
@@ -56,7 +56,7 @@ export default function Header({}: HeaderProps) {
           )}
 
           <div
-            className={`fixed top-0 right-0 z-[1000] h-full w-full bg-[#103931]  
+            className={`fixed top-0 right-0 z-[1000] h-[100vh] w-full bg-[var(--main)]  
             ${
               menuOpen ? 'translate-x-0' : 'translate-x-full'
             } transition-transform duration-500`}
